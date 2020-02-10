@@ -116,6 +116,7 @@ def create_pipeline_model_output_demo(**kwargs):
                 func=train_model,
                 inputs=["modin_example_train_x", "modin_example_train_y", "parameters"],
                 outputs="mod_example_model",
+                name="train_model",
             ),
             node(
                 func=predict,

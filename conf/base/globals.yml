@@ -1,2 +1,2 @@
-#path_prefix: "/Users/Guilherme_Braccialli/Documents/workspace/kedro-demo-feb2020" #for airflow demo
+#path_prefix: "/Users/Guilherme_Braccialli/Documents/workspace/kedro-demo-feb2020/" #for airflow demo
 path_prefix: ""

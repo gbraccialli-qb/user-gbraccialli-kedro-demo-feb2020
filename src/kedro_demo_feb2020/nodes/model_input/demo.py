@@ -91,6 +91,7 @@ def create_pipeline_model_input_demo(**kwargs):
                     test_y="modin_example_test_y",
                 ),
                 name="split_data",
+                tags=["uss"],
             ),
         ],
         tags=["demo", "model_input"],
