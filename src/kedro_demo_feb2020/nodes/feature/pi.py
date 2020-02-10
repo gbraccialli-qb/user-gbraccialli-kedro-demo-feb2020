@@ -25,18 +25,19 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Example code for the nodes in the example pipeline. This code is meant
-just for illustrating basic Kedro features.
 
-PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
-"""
 
 from typing import Any, Dict
 from kedro.pipeline import Pipeline, node
 import pandas as pd
+from pyspark.sql import functions as F
+from pyspark.sql import Window
+import pyspark
 
 
-def create_fea_pi_avg_3_hours(df: pd.DataFrame) -> pd.DataFrame:
+def create_fea_pi_avg_3_hours(
+    df: pyspark.sql.dataframe.DataFrame,
+) -> pyspark.sql.dataframe.DataFrame:
     """
     Create avg of past 3 hours for each tag
     Args:
@@ -44,6 +45,15 @@ def create_fea_pi_avg_3_hours(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df(pd.DataFrame): a pandas dataframe
     """
+
+    new_avg_columns = [
+        F.avg(F.col(col)).over(Window.rowsBetween(-3, -1)).alias(f"{col}_AVG_3_HOURS")
+        for col in df.columns
+        if col.lower().startswith("tag")
+    ]
+    existing_columns = [F.col(column) for column in df.columns]
+    return df.select(*(existing_columns + new_avg_columns))
+
     return df
 
 

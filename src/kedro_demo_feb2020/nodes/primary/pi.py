@@ -25,18 +25,16 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Example code for the nodes in the example pipeline. This code is meant
-just for illustrating basic Kedro features.
-
-PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
-"""
 
 from typing import Any, Dict
 from kedro.pipeline import Pipeline, node
 import pandas as pd
+import pyspark
 
 
-def create_prm_pi_tags(df: pd.DataFrame) -> pd.DataFrame:
+def create_prm_pi_tags(
+    df: pyspark.sql.dataframe.DataFrame,
+) -> pyspark.sql.dataframe.DataFrame:
     """
     To be used to convert csv to parquet
     Args:
