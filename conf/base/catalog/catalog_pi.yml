@@ -1,0 +1,34 @@
+
+# This is a data set used by the example pipeline provided with the projected
+# template. Please feel free to remove it once you remove the example pipeline.
+raw_pi_tags:
+    type: kedro.contrib.io.pyspark.SparkDataSet
+    filepath: "data/01_raw/pi_tags.csv"
+    file_format: csv
+    load_args:
+      sep: ','
+      header: True
+      schema: >
+        DATE_TIME timestamp,
+        TAG_1 double,
+        TAG_2 double,
+        TAG_3 double,
+        TAG_4 double,
+        TAG_5 double,
+        TAG_6 double,
+        TAG_7 double,
+        TAG_8 double
+
+prm_pi_tags:
+    type: kedro.contrib.io.pyspark.SparkDataSet
+    filepath: "data/03_primary/pi_tags.parquet"
+    file_format: parquet
+    save_args:
+      mode: 'overwrite'
+
+fea_pi_avg_3_hours:
+    type: kedro.contrib.io.pyspark.SparkDataSet
+    filepath: "data/04_features/pi_avg_3_hours.parquet"
+    file_format: parquet
+    save_args:
+      mode: 'overwrite'
